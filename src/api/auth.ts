@@ -1,6 +1,6 @@
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import api from '.';
-import { createContext, useContext } from 'react';
+import { createContext, useContext, useEffect } from 'react';
 
 const loginByEmail = ({
   email,
@@ -13,11 +13,32 @@ const loginByEmail = ({
     accessToken: data.accessToken as string,
   }));
 
+interface User {
+  id: string;
+  email: string;
+  nickname: string;
+  bio: string;
+  tags: string[];
+  followings: number;
+  followers: number;
+}
+
 export const useAuthProvider = () => {
-  const { mutate: mutateByEmail, error: emailLoginError } = useMutation({
-    mutationFn: loginByEmail,
-  });
-  return { loginByEmail: mutateByEmail, error: emailLoginError };
+  const {
+    mutate: mutateByEmail,
+    error: emailLoginError,
+    data: loginResponse,
+  } = useMutation({ mutationFn: loginByEmail });
+  const { data, refetch } = useQuery<User>({ queryKey: ['/user/me'] });
+
+  useEffect(() => {
+    if (loginResponse?.accessToken) {
+      localStorage.setItem('accessToken', loginResponse.accessToken);
+    }
+    refetch();
+  }, [loginResponse, refetch]);
+
+  return { loginByEmail: mutateByEmail, error: emailLoginError, user: data };
 };
 
 export const authContext = createContext<
