@@ -2,13 +2,16 @@ import React from 'react';
 import './tailwind.css';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import Router from './routes/Router';
+import { AuthProvider } from './api/auth';
 
 const queryClient = new QueryClient();
 
 const App: React.FC = () => {
   return (
     <QueryClientProvider client={queryClient}>
-      <Router />
+      <AuthProvider>
+        <Router />
+      </AuthProvider>
     </QueryClientProvider>
   );
 };
