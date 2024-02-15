@@ -6,6 +6,8 @@ import GStar from '../assets/GStar.png';
 import YStar from '../assets/YStar.png';
 import Input from './component/Input';
 import Btn from './component/Btn';
+import { createPortal } from 'react-dom';
+import { useQuery } from '@tanstack/react-query';
 
 export default function ReviewRegistration() {
   const [star, setStar] = useState<number>(1);
@@ -47,6 +49,14 @@ export default function ReviewRegistration() {
     }
   };
 
+  const [open, setOpen] = useState(false);
+  const [search, setSearch] = useState('');
+  const { data: searchData } = useQuery({
+    queryKey: ['/places/search', { keyword: search }],
+    enabled: !!search,
+  });
+  const [place, setPlace] = useState<{ id: string; placeName: string }>();
+
   return (
     <div>
       <Header text="리뷰 등록하기" back border />
@@ -58,7 +68,47 @@ export default function ReviewRegistration() {
           <h3 className="text-base font-bold pb-1">
             방문한 장소의 주소를 입력해주세요
           </h3>
-          <Input type="text" text="주소 찾기" />
+          <Btn className="bg-primary text-white" onClick={() => setOpen(true)}>
+            {place ? place.placeName : '주소 검색하기'}
+          </Btn>
+          {open &&
+            createPortal(
+              <div className="fixed inset-0 bg-black/50 grid place-items-center">
+                <div className="bg-white rounded px-8 py-4">
+                  <form
+                    onSubmit={(e) => {
+                      e.preventDefault();
+                      setSearch(e.currentTarget['address'].value);
+                    }}
+                    className="flex gap-1"
+                  >
+                    <Input
+                      text="주소를 입력해주세요"
+                      type="text"
+                      name="address"
+                    />
+                    <Btn className="bg-primary text-white">검색하기</Btn>
+                  </form>
+                  <ul className="flex flex-col gap-1 py-2">
+                    {searchData?.data.documents.map((place: any) => (
+                      <li key={place.id}>
+                        <button
+                          className="flex items-center p-1 bg-primary text-white rounded"
+                          onClick={() => {
+                            setOpen(false);
+                            return setPlace(place);
+                          }}
+                        >
+                          <FaLocationArrow />
+                          {place.placeName}
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>,
+              document.body,
+            )}
         </button>
         <label
           htmlFor="video"
