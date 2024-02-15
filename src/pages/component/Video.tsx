@@ -47,8 +47,8 @@ const Video: React.FC<VideoProps> = ({ src, grade, name }) => {
                     </div>
                     <div className='pl-2'>
                         <div className='flex items-center text-white text-sm'>
-                            <p className='text-white font-bold'>dawfawffawf</p>
-                            <button className='px-2 bg-inherit ml-2 border border-1 rounded-xl border-white text-white '>팔로우</button>
+                            <p className='text-white font-bold'>__A___D___</p>
+                            <button className='px-2 bg-inherit ml-2 border boer-1 rounded-xlrd border-white text-white '>팔로우</button>
                         </div>
                         <p className='text-white text-sm leading-7'>유성구 둔산동 백년식당</p>
                         <Grade grade={4.8} className={`w-[3%]`} className2={`text-sm text-white font-light`}/>
@@ -58,7 +58,6 @@ const Video: React.FC<VideoProps> = ({ src, grade, name }) => {
                 <span className='px-2 bg-inherit mr-2 border border-1 rounded-xl border-white text-white'>#가족</span>
                 <span className='px-2 bg-inherit mr-2 border border-1 rounded-xl border-white text-white'>#맛집</span>
             </div>
-            <Menu video={true}/>
             <Comment />
         </div>
     );
