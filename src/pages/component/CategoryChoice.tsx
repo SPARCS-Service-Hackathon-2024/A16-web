@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import Category from './Category';
 
 type CategoryChoice = {
   title: string;
@@ -39,10 +37,8 @@ const CategoryChoice: React.FC<CategoryChoice> = ({
   };
 
   return (
-    <div
-      className={`w-[80%] min-h-[150px] pb-[10px] bg-white rounded-2xl mx-auto mt-[20px] mb-[50px]`}
-    >
-      <div className="flex items-center justify-center h-[50px] text-xl font-bold">
+    <div className={`min-h-[150px] pb-[10px] bg-white rounded-2xl mx-auto`}>
+      <div className="flex items-center justify-center h-[50px] text-xl font-bold gap-2">
         {icon}
         <h3>{title}</h3>
       </div>
