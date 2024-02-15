@@ -5,7 +5,7 @@ import LinkText from './component/LinkText';
 export default function JoinWay() {
   return (
     <div className="mx-[10%] pt-[30%]">
-      <h3 className="text-3xl leading-[250px] text-center font-bold">
+      <h3 className="text-2xl leading-[250px] text-center font-bold">
         회원가입 방법을 선택하세요!
       </h3>
       <Btn text="이메일로 가입하기" className="bg-primary text-[#ffffff]" />
