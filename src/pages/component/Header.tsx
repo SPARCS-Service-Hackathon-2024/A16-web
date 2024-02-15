@@ -98,7 +98,7 @@ const Header: React.FC<HeaderProps> = ({
             className="bg-transparent outline-none h-[24px] w-[48px] flex justify-end"
           >
             <img
-              src="/assets/setting.png"
+              src={white ? '/assets/setting_white.png' : '/assets/setting.png'}
               alt="back"
               className={`object-cover w-auto h-full`}
             />

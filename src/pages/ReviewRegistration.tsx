@@ -206,7 +206,7 @@ export default function ReviewRegistration() {
               <button
                 type="button"
                 key={index}
-                className={`py-[1px] px-2 m-2 rounded-xl border ${
+                className={`py-[1px] px-2 m-2 rounded-xl border  ${
                   selectedCategories.includes(e)
                     ? 'border-primary text-primary'
                     : 'border-[#828282] text-[#828282]'
