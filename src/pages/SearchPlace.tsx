@@ -8,9 +8,9 @@ import { useNavigate } from 'react-router-dom';
 
 interface SearchPlaceProps {
   query: string;
-  places: string[];
-  withs: string[];
   regions: string[];
+  withs: string[];
+  tags: string[];
 }
 
 export default function SearchPlace() {
@@ -19,7 +19,7 @@ export default function SearchPlace() {
 
   const search: SubmitHandler<SearchPlaceProps> = (data) => {
     navigate(
-      `/map?query=${data.query}&places=${data.places}&withs=${data.withs}&regions=${data.regions}`,
+      `/map?query=${data.query}&withs=${data.withs}&regions=${data.regions}&tags=${data.tags}`,
     );
   };
 
@@ -50,7 +50,12 @@ export default function SearchPlace() {
           title="누구와 함께 가나요?"
           category={['혼자', '가족', '친구', '단체 모임', '연인', '부모님']}
           className="w-[70%]"
-          onChange={(v) => setValue('withs', v)}
+          onChange={(v) =>
+            setValue(
+              'withs',
+              v.map((v) => v.split(' ').reverse()[0]),
+            )
+          }
         />
         <CategoryChoice
           title="지역을 선택해주세요"
@@ -67,7 +72,7 @@ export default function SearchPlace() {
             '가족적인',
           ]}
           className="w-[80%]"
-          onChange={(v) => setValue('regions', v)}
+          onChange={(v) => setValue('tags', v)}
         />
         <div className="w-full px-8 pb-4">
           <Btn className="bg-primary text-white w-full">
