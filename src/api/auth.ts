@@ -30,7 +30,10 @@ export const useAuthProvider = () => {
     error: emailLoginError,
     data: loginResponse,
   } = useMutation({ mutationFn: loginByEmail });
-  const { data, refetch, error } = useQuery<User>({ queryKey: ['/user/me'] });
+  const { data, refetch, error } = useQuery<User>({
+    queryKey: ['/user/me'],
+    retry: false,
+  });
 
   useEffect(() => {
     if (loginResponse?.accessToken) {
