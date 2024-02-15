@@ -1,13 +1,12 @@
-import React from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
 import Header from './component/Header';
-import { FaLocationArrow } from "react-icons/fa";
-import { Link } from 'react-router-dom';
-import Category from './component/Category'; 
-import Grade from './component/Grade';
-import Feel from './component/Feel'; 
-import Reviews from './component/Reviews';
 import Menu from './component/Menu';
 import Video from './component/Video';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
+import api from '../api';
+import { useEffect, useState } from 'react';
 // type VideosProps = {
 //     type: string;
 //     profileImg: string;
@@ -16,19 +15,46 @@ import Video from './component/Video';
 //     videoImg?: string;
 //     followChk?: boolean;
 //     videoUrl: string;
-//     Categorys: string[];    
+//     Categorys: string[];
 // }
 
 export default function Videos() {
-    return (
-        <div className='h-[100vh] mb-[60px]'>
-            <Header back={true} review={true} white={true} text=' ' />
-            <Video  />
-            <Video  />
-            <Video  />
-            <Video  />
-            <Menu video={true}/>
-        </div>
-    );
-}
+  const { id } = useParams();
+  const { data, error } = useQuery({
+    queryKey: [
+      '/reviews',
+      { regions: ['서구', '중구', '유성구', '대덕구', '동구'] },
+    ],
+  });
 
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (id) return;
+    if (!data) return;
+    navigate(`/review/${data.data.list[0].id}`);
+  }, [data, id, navigate]);
+
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  return (
+    <div className="flex flex-col h-screen">
+      <Header back review white text=" " fixed />
+      <Swiper
+        className="w-full h-full flex-1 bg-black"
+        direction="vertical"
+        slidesPerView={1}
+        onSlideChange={(swiper) => setActiveIndex(swiper.activeIndex)}
+      >
+        {data?.data.list.map((review, index) => (
+          <SwiperSlide key={review.id}>
+            <div className="h-full w-full">
+              <Video {...review} active={activeIndex === index} />
+            </div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
+      <Menu video={true} />
+    </div>
+  );
+}

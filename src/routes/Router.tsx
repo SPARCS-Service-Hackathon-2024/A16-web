@@ -29,7 +29,8 @@ const Router = () => {
             <Route path="/SearchPerson" element={<SearchPerson />} />
             <Route path="/SearchPlace" element={<SearchPlace />} />
             <Route path="/Store" element={<Store />} />
-            <Route path="/Videos" element={<Videos />} />
+            <Route path="/review" element={<Videos />} />
+            <Route path="/review/:id" element={<Videos />} />
             <Route path="/mypage" element={<MyPage />} />
             <Route path="/setting" element={<Setting />} />
             <Route path="/profileChange" element={<ProfileChange />} />
