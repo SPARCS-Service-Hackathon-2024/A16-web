@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 type CommentPrors = {
-  text: String;
-  name: String;
-  img: String;
-  id: String;
+  text: string;
+  name: string;
+  img: string;
+  id: string;
 };
 
 const Comment: React.FC<CommentPrors> = ({ text, name, img, id }) => {

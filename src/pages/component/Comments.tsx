@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Comment from './Comment';
+import Teansfer from './Transfer';
 
 const Comments: React.FC = () => {
   return (
@@ -37,7 +38,7 @@ const Comments: React.FC = () => {
           id="1234"
           img="img"
         />
-        <div className="absolute left-0 bottom-0 w-full flex items-center h-14 border-t border-gray-300"></div>
+        <Teansfer />
       </div>
     </div>
   );

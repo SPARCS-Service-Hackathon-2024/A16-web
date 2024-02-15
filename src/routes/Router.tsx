@@ -8,6 +8,7 @@ import SearchPerson from '../pages/SearchPerson';
 import SearchPlace from '../pages/SearchPlace';
 import Store from '../pages/Store';
 import Videos from '../pages/Videos';
+import Setting from '../pages/Setting';
 import { useAuth } from '../api/auth';
 
 const Router = () => {
@@ -23,6 +24,7 @@ const Router = () => {
             <Route path="/SearchPlace" element={<SearchPlace />} />
             <Route path="/Store" element={<Store />} />
             <Route path="/Videos" element={<Videos />} />
+            <Route path="/setting" element={<Setting />} />
             <Route path="*" element={<Navigate to="/home" />} />
           </>
         ) : (

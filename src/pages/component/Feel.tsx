@@ -3,8 +3,8 @@ import Good from '../../assets/Good.png';
 import Bad from '../../assets/Bad.png';
 
 type FeelProps = {
-  BadReview: String[];
-  GoodReview: String[];
+  BadReview: string[];
+  GoodReview: string[];
 };
 
 const Feel: React.FC<FeelProps> = ({ BadReview, GoodReview }) => {
