@@ -10,7 +10,7 @@ type VideoProps = {
   grade?: string;
 };
 
-const Video = ({ user, place, tags, stars }: VideoProps) => {
+const Video = ({ user, place, tags, stars, likes }: VideoProps) => {
   const videoEl = React.useRef<HTMLVideoElement>(null);
 
   const handleVideoClick = () => {
@@ -36,15 +36,15 @@ const Video = ({ user, place, tags, stars }: VideoProps) => {
         muted
       ></video>
       <div className="bg-gradient-video w-full h-full absolute top-0 left-0"></div>
-      <div className="absolute right-5 bottom-[30%] z-10">
+      <div className="absolute right-5 bottom-[10%] z-10">
         <div className="heart flex flex-col justify-center items-center">
-          <div className="cursor-pointer">
+          <div className="cursor-pointer flex flex-col items-center">
             <img
               className="h-[20px] object-cover mt-6"
               src="/assets/heart.png"
               alt=""
             />
-            <p className="text-white text-xs mt-1">1235</p>
+            <p className="text-white text-xs mt-1">{likes}</p>
           </div>
           <div className="cursor-pointer">
             <img
