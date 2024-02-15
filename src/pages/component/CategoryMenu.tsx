@@ -69,7 +69,7 @@ const CategoryMenu = () => {
       </h3>
       <div className="mb-[20px] flex">
         <Link
-          to="/"
+          to="/map?tags=맛집"
           className={`flex flex-col items-center justify-center text-sm w-[48px] h-[60px] mx-auto `}
         >
           <img
@@ -80,7 +80,7 @@ const CategoryMenu = () => {
           <p>맛집</p>
         </Link>
         <Link
-          to="/"
+          to="/map?tags=디저트"
           className={`flex flex-col items-center justify-center text-sm w-[48px] h-[60px] mx-auto`}
         >
           <img
@@ -91,7 +91,7 @@ const CategoryMenu = () => {
           <p>디저트</p>
         </Link>
         <Link
-          to="/"
+          to="/map?tags=여가"
           className={`flex flex-col items-center justify-center text-sm w-[48px] h-[60px] mx-auto`}
         >
           <img
@@ -102,7 +102,7 @@ const CategoryMenu = () => {
           <p>여가</p>
         </Link>
         <Link
-          to="/"
+          to="/map?tags=과학"
           className={`flex flex-col items-center justify-center text-sm w-[48px] h-[60px] mx-auto`}
         >
           <img
