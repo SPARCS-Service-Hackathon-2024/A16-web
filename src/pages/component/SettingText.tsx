@@ -1,22 +1,25 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-type SettingTextPrors = {
+type SettingTextProps = {
   text: string;
   nextUrl?: string;
   icon?: boolean;
   border?: boolean;
+  onClick?: () => void;
 };
 
-const SettingText: React.FC<SettingTextPrors> = ({
+const SettingText = ({
   text,
   nextUrl,
   icon,
   border,
-}) => {
+  onClick,
+}: SettingTextProps) => {
   return (
     <Link
-      to={nextUrl ? nextUrl : '#'}
+      onClick={onClick}
+      to={nextUrl ?? '#'}
       className={`h-[64px] w-full leading-[64px] flex items-center pl-5 ${
         border && 'border-b border-gray-300'
       }`}

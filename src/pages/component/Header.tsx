@@ -82,7 +82,7 @@ const Header: React.FC<HeaderProps> = ({
         )}
         {review && (
           <Link
-            to={'/Review'}
+            to={'/review-registration'}
             className="bg-transparent outline-none h-[24px] w-[48px] flex justify-end"
           >
             <img

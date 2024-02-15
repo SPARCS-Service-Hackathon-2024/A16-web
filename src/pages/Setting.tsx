@@ -1,8 +1,9 @@
-import React from 'react';
+import { useAuth } from '../api/auth';
 import Header from './component/Header';
 import SettingText from './component/SettingText';
 
 export default function Store() {
+  const { logout } = useAuth();
   return (
     <div>
       <Header text="설정" back border />
@@ -17,7 +18,7 @@ export default function Store() {
       <SettingText text="서비스이용약관"></SettingText>
       <SettingText text="개인정보처리방침"></SettingText>
       <SettingText text="버전 정보" border></SettingText>
-      <SettingText text="로그아웃"></SettingText>
+      <SettingText text="로그아웃" onClick={logout}></SettingText>
     </div>
   );
 }

@@ -4,7 +4,7 @@ import TileLayer from 'ol/layer/Tile';
 import 'ol/ol.css';
 import { PROJECTIONS } from 'ol/proj/epsg4326';
 import OSM from 'ol/source/OSM';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Header from './component/Header';
 import SearchMenu from './component/SearchMenu';
 import VectorSource from 'ol/source/Vector';
@@ -25,6 +25,34 @@ const MapPage = () => {
       features: [],
     }),
   );
+  const clusters = useRef(
+    new VectorLayer({
+      source: new Cluster({
+        distance: 40,
+        source: source.current,
+      }),
+      style: (feature) => {
+        const size = feature.get('features').length;
+        return new Style({
+          image: new CircleStyle({
+            radius: 10,
+            stroke: new Stroke({
+              color: '#fff',
+            }),
+            fill: new Fill({
+              color: '#3399CC',
+            }),
+          }),
+          text: new Text({
+            text: size.toString(),
+            fill: new Fill({
+              color: '#fff',
+            }),
+          }),
+        });
+      },
+    }),
+  );
 
   const mapRef = useRef<Map>();
 
@@ -38,38 +66,17 @@ const MapPage = () => {
         // maxZoom: 10,
         // minZoom: 6,
       }),
-      layers: [
-        new TileLayer({ source: new OSM() }),
-        new VectorLayer({
-          source: new Cluster({
-            distance: 40,
-            source: source.current,
-          }),
-          style: (feature) => {
-            const size = feature.get('features').length;
-            return new Style({
-              image: new CircleStyle({
-                radius: 10,
-                stroke: new Stroke({
-                  color: '#fff',
-                }),
-                fill: new Fill({
-                  color: '#3399CC',
-                }),
-              }),
-              text: new Text({
-                text: size.toString(),
-                fill: new Fill({
-                  color: '#fff',
-                }),
-              }),
-            });
-          },
-        }),
-      ],
+      layers: [new TileLayer({ source: new OSM() }), clusters.current],
     });
     const map = mapRef.current;
     map.setTarget(wrapperEl.current ?? undefined);
+    map.on('singleclick', async (e) => {
+      const features = (await clusters.current.getFeatures(
+        e.pixel,
+      )) as Feature<Point>[];
+      console.log(features);
+      setFeature(features[0] ?? null);
+    });
     return () => {
       map.dispose();
     };
@@ -83,9 +90,12 @@ const MapPage = () => {
       const lat = 36.3407831 + r * Math.sin(deg);
       const lon = 127.3922689 + r * Math.cos(deg);
       const feature = new Feature(new Point([lon, lat]));
+      feature.set('name', `Feature ${i}`);
       source.current.addFeature(feature);
     }
-  });
+  }, []);
+
+  const [feature, setFeature] = useState<Feature<Point> | null>(null);
 
   return (
     <div className="">
@@ -100,17 +110,12 @@ const MapPage = () => {
         <div className="h-4 place-items-center grid">
           <div className="h rounded w-16 h-2 bg-gray-300" />
         </div>
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nihil sit
-        velit nulla alias perferendis quas aspernatur vero cupiditate, provident
-        esse obcaecati nobis deserunt minima modi et vel praesentium rem iure,
-        atque maxime. Inventore eius eligendi sint autem, dolorum nobis ipsam
-        accusamus maiores quas odit in deserunt! Deserunt reprehenderit nobis
-        at, aliquam animi vero ullam voluptates ex reiciendis inventore laborum
-        numquam vitae natus corporis quis sed nostrum, voluptatibus possimus
-        dolor consequatur eum soluta culpa provident. Deserunt facere alias at
-        modi? Molestiae nobis, quibusdam fugit omnis esse debitis quas modi
-        neque eum eaque! Earum itaque ea ex voluptas reprehenderit nihil quia
-        numquam.
+        {feature && (
+          <div className="p-4">
+            <p>{feature.get('name')}</p>
+            gr
+          </div>
+        )}
       </div>
     </div>
   );

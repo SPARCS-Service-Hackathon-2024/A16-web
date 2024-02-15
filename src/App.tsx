@@ -8,7 +8,10 @@ import api from './api';
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      queryFn: async ({ queryKey }) => api.get(queryKey[0] as string),
+      queryFn: async ({ queryKey }) =>
+        api.get(queryKey[0] as string, {
+          params: queryKey[1],
+        }),
     },
   },
 });
