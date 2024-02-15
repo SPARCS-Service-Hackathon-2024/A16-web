@@ -2,67 +2,65 @@ import React, { useState } from 'react';
 import GStar from '../../assets/GStar.png';
 import YStar from '../../assets/YStar.png';
 import HalfStar from '../../assets/HalfStar.png';
+import Reviews from './Reviews';
 
-type GradeProps = {
-  grade?: number;
-  className?: string;
-  className2?: string;
-};
+const MypageMenu: React.FC = () => {
+  const [activeTab, setActiveTab] = useState<string>('내 리뷰'); // 활성화된 탭을 관리하는 상태
 
-const Grade: React.FC<GradeProps> = ({
-  grade = 3.5,
-  className,
-  className2,
-}) => {
-  const integerPart = Math.floor(grade);
-  const restPart = grade % 1;
-
-  const renderInteger = () => {
-    const integerElements = [];
-    for (let i = 0; i < integerPart; i++) {
-      integerElements.push(
-        <div className={`w-[6%] mr-1 ${className}`}>
-          <img className="w-full object-cover" src={YStar} alt="" />
-        </div>,
-      );
-    }
-    return integerElements;
-  };
-
-  const renderRest = () => {
-    const restElements = [];
-    if (restPart >= 0.5) {
-      restElements.push(
-        <div className={`w-[6%] mr-1 ${className}`}>
-          <img className="w-full object-cover" src={HalfStar} alt="" />
-        </div>,
-      );
-    } else {
-      restElements.push(
-        <div className={`w-[6%] mr-1 ${className}`}>
-          <img className="w-full object-cover" src={GStar} alt="" />
-        </div>,
-      );
-    }
-    for (let i = 0; i < 4 - integerPart; i++) {
-      restElements.push(
-        <div className={`w-[6%] mr-1 ${className}`}>
-          <img className="w-full object-cover" src={GStar} alt="" />
-        </div>,
-      );
-    }
-    return restElements;
+  // 버튼 클릭 시 해당 버튼의 활성화 상태를 변경하는 함수
+  const handleTabClick = (tabName: string) => {
+    setActiveTab(tabName);
+    console.log(activeTab);
   };
 
   return (
-    <div className="flex items-center mb-[10px]">
-      {renderInteger()}
-      {renderRest()}
-      <p className={`pl-2 text-2xl font-bold leading-[100%] ${className2}`}>
-        {grade}
-      </p>
+    <div>
+      <div className="flex items-center mb-[1px]">
+        <div className="h-15 w-full flex items-center">
+          <button
+            type="button"
+            className={`w-1/3 h-full bg-white font-bold leading-[45px] border-b border-gray-300 ${
+              activeTab === '내 리뷰'
+                ? 'border-[#2E83F2] text-black'
+                : 'border-gary-300 text-[#cccccc]'
+            }`}
+            onClick={() => handleTabClick('내 리뷰')}
+          >
+            내 리뷰
+          </button>
+          <button
+            type="button"
+            className={`w-1/3 h-full bg-white font-bold leading-[45px] border-b border-gray-300 ${
+              activeTab === '좋아요 한 리뷰'
+                ? 'border-[#2E83F2] text-black'
+                : 'border-gary-300 text-[#cccccc]'
+            }`}
+            onClick={() => handleTabClick('좋아요 한 리뷰')}
+          >
+            좋아요 한 리뷰
+          </button>
+          <button
+            type="button"
+            className={`w-1/3 h-full bg-white font-bold leading-[45px] border-b border-gray-300 ${
+              activeTab === '찜한 장소'
+                ? 'border-[#2E83F2] text-black'
+                : 'border-gary-300 text-[#cccccc]'
+            }`}
+            onClick={() => handleTabClick('찜한 장소')}
+          >
+            찜한 장소
+          </button>
+        </div>
+      </div>
+      <div className={`${activeTab != '내 리뷰' && 'hidden'}`}>
+        <Reviews />
+      </div>
+      <div className={`${activeTab != '좋아요 한 리뷰' && 'hidden'}`}>
+        <Reviews />
+      </div>
+      <div className={`${activeTab != '찜한 장소' && 'hidden'}`}></div>
     </div>
   );
 };
 
-export default Grade;
+export default MypageMenu;

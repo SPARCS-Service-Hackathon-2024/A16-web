@@ -1,5 +1,7 @@
 import Header from './component/Header';
 import { Link } from 'react-router-dom';
+import MypageMenu from './component/MypageMenu';
+import Menu from './component/Menu';
 
 export default function MyPage() {
   return (
@@ -39,7 +41,8 @@ export default function MyPage() {
           한줄소개입니다한줄소개입니다한줄소개입니다한줄소개입니다
         </p>
       </div>
-      .
+      <MypageMenu />
+      <Menu mypage />
     </div>
   );
 }
