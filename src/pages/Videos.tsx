@@ -6,7 +6,7 @@ import Video from './component/Video';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import api from '../api';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 // type VideosProps = {
 //     type: string;
 //     profileImg: string;
@@ -35,6 +35,8 @@ export default function Videos() {
     navigate(`/review/${data.data.list[0].id}`);
   }, [data, id, navigate]);
 
+  const [activeIndex, setActiveIndex] = useState(0);
+
   return (
     <div className="flex flex-col h-screen">
       <Header back review white text=" " fixed />
@@ -42,12 +44,12 @@ export default function Videos() {
         className="w-full h-full flex-1 bg-black"
         direction="vertical"
         slidesPerView={1}
-        onSlideChange={(d) => console.log(JSON.stringify(d))}
+        onSlideChange={(swiper) => setActiveIndex(swiper.activeIndex)}
       >
-        {data?.data.list.map((review) => (
+        {data?.data.list.map((review, index) => (
           <SwiperSlide key={review.id}>
             <div className="h-full w-full">
-              <Video {...review} />
+              <Video {...review} active={activeIndex === index} />
             </div>
           </SwiperSlide>
         ))}

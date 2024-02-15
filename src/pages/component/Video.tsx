@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Menu from './Menu';
 import Grade from './Grade';
@@ -10,7 +10,7 @@ type VideoProps = {
   grade?: string;
 };
 
-const Video = ({ user, place, tags, stars, likes }: VideoProps) => {
+const Video = ({ user, place, tags, stars, likes, active }: VideoProps) => {
   const videoEl = React.useRef<HTMLVideoElement>(null);
 
   const handleVideoClick = () => {
@@ -22,6 +22,16 @@ const Video = ({ user, place, tags, stars, likes }: VideoProps) => {
       }
     }
   };
+
+  useEffect(() => {
+    if (videoEl.current) {
+      if (active) {
+        videoEl.current.play();
+      } else {
+        videoEl.current.pause();
+      }
+    }
+  }, [active]);
 
   return (
     <div
