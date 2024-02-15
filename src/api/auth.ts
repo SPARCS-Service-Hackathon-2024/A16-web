@@ -3,6 +3,9 @@ import { createContext, useContext, useEffect } from 'react';
 import api from '.';
 import { removeToken, saveToken } from '../utils/tokens';
 
+export const getKakaoAuthorizeUrl = () =>
+  api.get<string>('/auth/kakao/authorize').then(({ data }) => data);
+
 const loginByEmail = ({
   email,
   password,
