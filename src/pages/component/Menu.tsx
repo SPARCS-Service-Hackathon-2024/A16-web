@@ -36,7 +36,7 @@ const Menu: React.FC<MenuProps> = ({ home, map, video, mypage }) => {
         <p>지도</p>
       </Link>
       <Link
-        to="/Videos"
+        to="/review"
         className={`flex flex-col items-center justify-center text-sm w-[25%] h-[60px] ${
           video ? 'text-[#000000]' : 'text-[#828282]'
         }`}

@@ -11,6 +11,7 @@ type HeaderProps = {
   className?: string;
   border?: boolean;
   white?: boolean;
+  fixed?: boolean;
 };
 
 const Header: React.FC<HeaderProps> = ({
@@ -22,6 +23,7 @@ const Header: React.FC<HeaderProps> = ({
   setting,
   border,
   white,
+  fixed = false,
 }) => {
   const navigate = useNavigate();
 
@@ -31,7 +33,9 @@ const Header: React.FC<HeaderProps> = ({
 
   return (
     <div
-      className={`max-w-screen-sm w-[100%] h-[56px] left-50% px-5 z-50 sticky top-0 flex justify-between items-center pl-3 leading-[56px] ${
+      className={`max-w-screen-sm w-[100%] h-[56px] left-50% px-5 z-50 ${
+        fixed ? 'fixed' : 'sticky'
+      } top-0 flex justify-between items-center pl-3 leading-[56px] ${
         white ? 'bg-inherit' : 'bg-white'
       } ${border && 'border-b border-[#E5E5E5]'} ${className}`}
     >
