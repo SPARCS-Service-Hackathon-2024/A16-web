@@ -1,7 +1,7 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { createContext, useContext, useEffect } from 'react';
 import api from '.';
-import { saveToken } from '../utils/tokens';
+import { removeToken, saveToken } from '../utils/tokens';
 
 const loginByEmail = ({
   email,
@@ -39,10 +39,16 @@ export const useAuthProvider = () => {
     refetch();
   }, [loginResponse, refetch]);
 
+  const logout = () => {
+    removeToken();
+    refetch();
+  };
+
   return {
     loginByEmail: mutateByEmail,
     error: emailLoginError,
     user: error ? null : data,
+    logout,
   };
 };
 
