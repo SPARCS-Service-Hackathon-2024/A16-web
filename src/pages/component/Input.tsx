@@ -46,6 +46,7 @@ const Input = ({
         />
         {type == 'password' && (
           <button
+            type="button"
             onClick={togglePasswordVisibility}
             className="bg-transparent outline-none h-[24px] w-[24px] m-auto"
           >
