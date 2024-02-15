@@ -13,7 +13,7 @@ export default function Login() {
         LinkMsg="비밀번호 재설정"
         to="/Login"
       />
-      <Btn text="로그인" className="bg-[#2E83F2] text-[#ffffff]" />
+      <Btn text="로그인" className="bg-primary text-white" />
       <Btn
         text="카카오톡으로 로그인하기"
         className="bg-[#F2DA00] text-[#282732] border border-[#E8E9EA]"
