@@ -16,7 +16,7 @@ export default {
           'linear-gradient(to top,rgba(0,0,0,.4) 0,rgba(0,0,0,0) 160px),linear-gradient(to bottom,rgba(0,0,0,.4) 0,rgba(0,0,0,0) 96px)',
       },
       height: {
-        custom: 'calc(100% - 60px)',
+        custom: 'calc(100vh - 60px)',
       },
     },
   },
