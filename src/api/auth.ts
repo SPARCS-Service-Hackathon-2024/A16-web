@@ -29,7 +29,7 @@ export const useAuthProvider = () => {
     error: emailLoginError,
     data: loginResponse,
   } = useMutation({ mutationFn: loginByEmail });
-  const { data, refetch } = useQuery<User>({ queryKey: ['/user/me'] });
+  const { data, refetch, error } = useQuery<User>({ queryKey: ['/user/me'] });
 
   useEffect(() => {
     if (loginResponse?.accessToken) {
@@ -38,7 +38,11 @@ export const useAuthProvider = () => {
     refetch();
   }, [loginResponse, refetch]);
 
-  return { loginByEmail: mutateByEmail, error: emailLoginError, user: data };
+  return {
+    loginByEmail: mutateByEmail,
+    error: emailLoginError,
+    user: error ? null : data,
+  };
 };
 
 export const authContext = createContext<
