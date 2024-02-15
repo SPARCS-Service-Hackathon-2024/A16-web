@@ -31,8 +31,8 @@ const SearchBar: React.FC<SearchBarProps> = ({ type}) => {
                 <input
                     value={value}
                     onChange={handleChange}
-                    className="w-[85%] h-[48px] text-base mb-[4px] outline-none placeholder-[#CECED1] bg-[#ffffff]"
-                    placeholder={type == "person" ? "리뷰를 보고 싶은 장소를 입력해주세요!" : "찾고 싶은 사람의 닉네임을 입력하세요!"}
+                    className="w-[85%] h-[48px] text-base mb-[4px] outline-none placeholder-[#828282] bg-[#ffffff]"
+                    placeholder={type == "place" ? "리뷰를 보고 싶은 장소를 입력해주세요!" : "찾고 싶은 사람의 닉네임을 입력하세요!"}
                 />
                 <div className='w-[7.5%] flex justify-end'>
                     <button className=' w-[18px] h-[18px]'><img className='w-[100%] h-[100%]' src="/assets/search.png" alt="search" /></button>

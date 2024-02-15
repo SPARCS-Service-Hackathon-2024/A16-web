@@ -8,7 +8,8 @@ import Join from './pages/Join';
 import Home from './pages/Home';
 import Alarm from './pages/Alarm';
 import SearchPerson from './pages/SearchPerson';
-
+import SearchPlace from './pages/SearchPlace';
+import Store from './pages/Store';
 
 const App: React.FC = () => {
 
@@ -22,6 +23,8 @@ const App: React.FC = () => {
         <Route path='/Home' element={<Home/>}/>
         <Route path='/Alarm' element={<Alarm/>}/>
         <Route path='/SearchPerson' element={<SearchPerson/>}/>
+        <Route path='/SearchPlace' element={<SearchPlace/>}/>
+        <Route path='/Store' element={<Store/>}/>
       </Routes>
     </BrowserRouter>
   );

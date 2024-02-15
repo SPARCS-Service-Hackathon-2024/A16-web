@@ -9,10 +9,10 @@ type AlarmLineProps = {
     name: string;
     videoImg?: string;
     followChk?: boolean;
-    videoUrl?: string;
+    videoUrl: string;
 }
 
-const SearchMenu: React.FC<AlarmLineProps> = ({type, profileImg, profileUrl, videoUrl, name, videoImg, followChk }) => {
+const AlarmLine: React.FC<AlarmLineProps> = ({type, profileImg, profileUrl, videoUrl, name, videoImg, followChk }) => {
 
     return (
         <div className="h-[64px] flex items-center justify-between">
@@ -24,4 +24,4 @@ const SearchMenu: React.FC<AlarmLineProps> = ({type, profileImg, profileUrl, vid
     );
 }
 
-export default SearchMenu;
+export default AlarmLine;

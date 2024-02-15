@@ -1,7 +1,6 @@
 import React from 'react';
 import Btn from './component/Btn';
 import Input from './component/Input';
-import LinkText from './component/LinkText';
 import Header from './component/Header';
 
 export default function Join() {

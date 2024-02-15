@@ -9,7 +9,7 @@ const SearchMenu: React.FC = () => {
     return (
         <div className="h-[62px]">
             <div className={`max-w-screen-sm w-[60%] my-[9px] mx-auto h-[44px] flex justify-between items-center text-[#828282] shadow-custom rounded-[44px]`}>
-                <Link to="/SearchMap" className={`flex items-center justify-center text-sm w-[50%] h-[60px]`}>
+                <Link to="/SearchPlace" className={`flex items-center justify-center text-sm w-[50%] h-[60px]`}>
                     <GrMap className='text-xl mr-2' />
                     <p>장소 검색</p>
                 </Link>
