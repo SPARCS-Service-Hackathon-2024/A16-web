@@ -44,7 +44,7 @@ const Input = forwardRef<
               onChange={handleChange}
               className={`h-[48px] w-full text-base px-2 outline-none border border-[#E5E5E5] placeholder-[#CECED1] bg-[#F7F8F9] ${
                 type === 'password' ? 'pr-10' : ''
-              }`}
+              } ${inputProps.readOnly ? 'text-gray-500' : ''}`}
               placeholder={text}
             />
             {type === 'password' && (

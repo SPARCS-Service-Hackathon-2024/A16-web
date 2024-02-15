@@ -1,6 +1,10 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
-import api from '.';
 import { createContext, useContext, useEffect } from 'react';
+import api from '.';
+import { removeToken, saveToken } from '../utils/tokens';
+
+export const getKakaoAuthorizeUrl = () =>
+  api.get<string>('/auth/kakao/authorize').then(({ data }) => data);
 
 const loginByEmail = ({
   email,
@@ -29,19 +33,28 @@ export const useAuthProvider = () => {
     error: emailLoginError,
     data: loginResponse,
   } = useMutation({ mutationFn: loginByEmail });
-  const { data, refetch, error } = useQuery<User>({ queryKey: ['/user/me'] });
+  const { data, refetch, error } = useQuery<User>({
+    queryKey: ['/user/me'],
+    retry: false,
+  });
 
   useEffect(() => {
     if (loginResponse?.accessToken) {
-      localStorage.setItem('accessToken', loginResponse.accessToken);
+      saveToken(loginResponse.accessToken);
     }
     refetch();
   }, [loginResponse, refetch]);
+
+  const logout = () => {
+    removeToken();
+    refetch();
+  };
 
   return {
     loginByEmail: mutateByEmail,
     error: emailLoginError,
     user: error ? null : data,
+    logout,
   };
 };
 

@@ -11,6 +11,7 @@ import Videos from '../pages/Videos';
 import Setting from '../pages/Setting';
 import { useAuth } from '../api/auth';
 import ReviewRegistration from '../pages/ReviewRegistration';
+import MapPage from '../pages/Map';
 
 const Router = () => {
   const { user } = useAuth();
@@ -31,6 +32,7 @@ const Router = () => {
               path="/reviewRegistration"
               element={<ReviewRegistration />}
             />
+            <Route path="/map" element={<MapPage />} />
             <Route path="*" element={<Navigate to="/home" />} />
           </>
         ) : (
