@@ -2,9 +2,10 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import Btn from './component/Btn';
 import Header from './component/Header';
 import Input from './component/Input';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRegister } from '../api/hooks/auth';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { decode } from 'js-base64';
 
 interface JoinForm {
   email: string;
@@ -16,12 +17,16 @@ interface JoinForm {
 
 export default function Join() {
   const navigate = useNavigate();
+  const { state } = useLocation();
+  const kakao = state?.kakao as string | undefined;
+
   const {
     register,
     handleSubmit,
     formState: { errors },
     getValues,
     setError,
+    setValue,
   } = useForm<JoinForm>();
 
   const [status, setStatus] = useState<
@@ -44,12 +49,20 @@ export default function Join() {
       setError('passwordConfirm', { message: '비밀번호가 다릅니다' });
       return;
     }
-    if (!emailVerificationToken) return;
+    if (kakao ? false : !emailVerificationToken) return;
 
     await checkNickname(data.nickname);
+    console.log(
+      JSON.stringify({
+        email: data.email,
+        emailVerificationToken: emailVerificationToken ?? kakao!,
+        nickname: data.nickname,
+        password: data.password,
+      }),
+    );
     await registerByEmail({
       email: data.email,
-      emailVerificationToken,
+      emailVerificationToken: emailVerificationToken ?? kakao!,
       nickname: data.nickname,
       password: data.password,
     });
@@ -71,6 +84,15 @@ export default function Join() {
     setStatus('success');
   };
 
+  useEffect(() => {
+    if (!kakao) return;
+    const payload = kakao.split('.')[1];
+    const decoded = decode(payload);
+    const json = JSON.parse(decoded);
+    setValue('email', json.email);
+    setValue('nickname', json.nickname);
+  }, [kakao, setValue]);
+
   return (
     <form onSubmit={handleSubmit(join)} className="h-screen flex flex-col">
       <Header text="회원가입" back={true} border={true} />
@@ -83,26 +105,29 @@ export default function Join() {
             label="이메일"
             autoCapitalize="off"
             autoComplete="off"
+            readOnly={!!kakao}
             errorMessage={
               errors.email?.message ??
               (emailError ? '이메일 중복입니다.' : undefined)
             }
             trailing={
-              <Btn
-                type="button"
-                className={`text-white left-0 mt-4 ${
-                  ['pending', 'loading'].includes(status)
-                    ? 'bg-gray-300'
-                    : 'bg-primary'
-                }`}
-                onClick={
-                  !['pending', 'loading'].includes(status)
-                    ? verifyEmail
-                    : undefined
-                }
-              >
-                코드 전송
-              </Btn>
+              kakao ? null : (
+                <Btn
+                  type="button"
+                  className={`text-white left-0 mt-4 ${
+                    ['pending', 'loading'].includes(status)
+                      ? 'bg-gray-300'
+                      : 'bg-primary'
+                  }`}
+                  onClick={
+                    !['pending', 'loading'].includes(status)
+                      ? verifyEmail
+                      : undefined
+                  }
+                >
+                  코드 전송
+                </Btn>
+              )
             }
             {...register('email')}
           />
