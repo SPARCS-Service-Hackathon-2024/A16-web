@@ -1,44 +1,38 @@
-import React, { useState } from 'react';
-import Header from './component/Header';
+import { useQuery } from '@tanstack/react-query';
+import { useState } from 'react';
+import { createPortal } from 'react-dom';
 import { FaLocationArrow } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import api from '../api';
 import GStar from '../assets/GStar.png';
 import YStar from '../assets/YStar.png';
-import Input from './component/Input';
 import Btn from './component/Btn';
-import { createPortal } from 'react-dom';
-import { useQuery } from '@tanstack/react-query';
+import Header from './component/Header';
+import Input from './component/Input';
+
+const withs = ['혼자', '가족', '연인', '친구', '부모님', '모임'];
+const tags = [
+  '맛집',
+  '디저트',
+  '데이트코스',
+  '교육적인',
+  '추억만들기',
+  '대전의 명물',
+  '감성적인',
+  '가족적인',
+  '혼자서도 좋아요',
+  '과학',
+  '여가',
+];
 
 export default function ReviewRegistration() {
+  const navigate = useNavigate();
   const [star, setStar] = useState<number>(1);
   const [selectedCategories, setSelectedCategories] = useState<string[]>([
     '맛집',
     '혼자',
   ]);
-  const [category, setCategory] = useState<string[]>([
-    '혼자',
-    '가족',
-    '연인',
-    '친구',
-    '부모님',
-    '모임',
-  ]);
-  const [category2, setCategory2] = useState<string[]>([
-    '맛집',
-    '디저트',
-    '데이트코스',
-    '교육적인',
-    '추억만들기',
-    '대전의 명물',
-    '감성적인',
-    '가족적인',
-    '혼자서도 좋아요',
-    '과학',
-    '여가',
-  ]);
-  const handleStarClick = (number: number) => {
-    setStar(number);
-  };
+
   const handleCategoryClick = (category: string) => {
     if (selectedCategories.includes(category)) {
       setSelectedCategories(
@@ -56,6 +50,23 @@ export default function ReviewRegistration() {
     enabled: !!search,
   });
   const [place, setPlace] = useState<{ id: string; placeName: string }>();
+  const [file, setFile] = useState<File>();
+  const [content, setContent] = useState<string>('');
+
+  const submit = async () => {
+    const fd = new FormData();
+    fd.append('file', file as Blob);
+    const uploadRes = await api.post<{ token: string }>('/files/videos', fd);
+    const result = await api.post('/reviews', {
+      placeId: place?.id,
+      videoToken: uploadRes.data.token,
+      stars: star,
+      with: selectedCategories.filter((cat) => withs.includes(cat)),
+      tags: selectedCategories.filter((cat) => tags.includes(cat)),
+      content,
+    });
+    navigate(`/review/${result.data.id}`);
+  };
 
   return (
     <div>
@@ -93,6 +104,7 @@ export default function ReviewRegistration() {
                     {searchData?.data.documents.map((place: any) => (
                       <li key={place.id}>
                         <button
+                          type="button"
                           className="flex items-center p-1 bg-primary text-white rounded"
                           onClick={() => {
                             setOpen(false);
@@ -120,11 +132,17 @@ export default function ReviewRegistration() {
             alt=""
           />
           <p className="flex leading-10">리뷰 영상을 업로드 해주세요</p>
-          <input id="video" type="file" hidden accept=".mp4" />
+          <input
+            id="video"
+            type="file"
+            hidden
+            accept=".mp4"
+            onChange={(e) => setFile(e.currentTarget.files?.[0])}
+          />
         </label>
         <div className="w-full bg-white px-2 py-5 flex flex-col justify-center items-center rounded-xl">
           <h3 className="text-base font-bold">방문한 장소가 어땠나요?</h3>
-          <div className="flex items-center ">
+          <div className="flex items-center">
             <button type="button" onClick={() => setStar(1)}>
               <img
                 className="h-6 w-6 mx-1"
@@ -160,7 +178,7 @@ export default function ReviewRegistration() {
                 alt=""
               />
             </button>
-            <h1 className="text-xl">4.0</h1>
+            <h1 className="text-xl">{star.toFixed(1)}</h1>
           </div>
         </div>
         <div className="w-full bg-white px-2 py-5 flex flex-col justify-center items-center rounded-xl">
@@ -170,7 +188,7 @@ export default function ReviewRegistration() {
           </h3>
           <p className="leading-10">누구와 방문하면 좋을 것 같나요?</p>
           <div className="flex items-center flex-wrap justify-center">
-            {category.map((e, index) => (
+            {withs.map((e, index) => (
               <button
                 type="button"
                 key={index}
@@ -187,7 +205,7 @@ export default function ReviewRegistration() {
           </div>
           <p className="leading-10">누구와 방문한 장소는 어떘나요?</p>
           <div className="flex items-center flex-wrap justify-center">
-            {category2.map((e, index) => (
+            {tags.map((e, index) => (
               <button
                 type="button"
                 key={index}
@@ -210,9 +228,12 @@ export default function ReviewRegistration() {
           <textarea
             className="w-[100%] h-[172px] outline-none bg-[#F1F7FF] p-2 rounded-lg"
             placeholder="리뷰 작성하기"
+            onChange={(e) => setContent(e.currentTarget.value)}
           ></textarea>
         </div>
-        <Btn className="bg-primary text-white">등록하기</Btn>
+        <Btn className="bg-primary text-white" onClick={submit}>
+          등록하기
+        </Btn>
       </div>
     </div>
   );
