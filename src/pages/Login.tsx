@@ -39,7 +39,7 @@ export default function Login() {
   };
 
   return (
-    <form onSubmit={login} className="mx-[10%] pt-[30%]">
+    <form onSubmit={login} className="mx-[10%] pt-[30%] flex flex-col gap-4">
       <h3 className="text-3xl leading-[100px] text-center font-bold">로그인</h3>
       <Input
         type="text"
@@ -56,7 +56,7 @@ export default function Login() {
         errorMessage={passwordError}
       />
       <LinkText
-        className="leading-[30px] mb-[40px] justify-end"
+        className="leading-[30px] mb-4 justify-end"
         LinkMsg="비밀번호 재설정"
         to="/login"
       />
