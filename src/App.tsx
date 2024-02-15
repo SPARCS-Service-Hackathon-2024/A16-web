@@ -10,6 +10,7 @@ import Alarm from './pages/Alarm';
 import SearchPerson from './pages/SearchPerson';
 import SearchPlace from './pages/SearchPlace';
 import Store from './pages/Store';
+import Videos from './pages/Videos';
 
 const App: React.FC = () => {
 
@@ -25,6 +26,7 @@ const App: React.FC = () => {
         <Route path='/SearchPerson' element={<SearchPerson/>}/>
         <Route path='/SearchPlace' element={<SearchPlace/>}/>
         <Route path='/Store' element={<Store/>}/>
+        <Route path='/Videos' element={<Videos/>}/>
       </Routes>
     </BrowserRouter>
   );

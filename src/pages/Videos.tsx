@@ -7,7 +7,7 @@ import Grade from './component/Grade';
 import Feel from './component/Feel'; 
 import Reviews from './component/Reviews';
 import Menu from './component/Menu';
-
+import Video from './component/Video';
 // type VideosProps = {
 //     type: string;
 //     profileImg: string;
@@ -21,9 +21,13 @@ import Menu from './component/Menu';
 
 export default function Videos() {
     return (
-        <div className='h-[100vh]'>
-            <Header back={true} alarm={true} />
-
+        <div className='h-[100vh] mb-[60px]'>
+            <Header back={true} review={true} white={true} text=' ' />
+            <Video  />
+            <Video  />
+            <Video  />
+            <Video  />
+            <Menu video={true}/>
         </div>
     );
 }
