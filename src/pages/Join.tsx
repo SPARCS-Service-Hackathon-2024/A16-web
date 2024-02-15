@@ -1,7 +1,6 @@
-import React from 'react';
 import Btn from './component/Btn';
-import Input from './component/Input';
 import Header from './component/Header';
+import Input from './component/Input';
 
 export default function Join() {
   return (
@@ -12,7 +11,7 @@ export default function Join() {
           type="text"
           text="abcde@gmail.com"
           label="이메일"
-          errorMsg="규칙에 맞는 이메일을 입력해주세요!"
+          errorMessage="규칙에 맞는 이메일을 입력해주세요!"
           className="mt-[10%] h-[115px]"
         />
         <Input
@@ -31,13 +30,12 @@ export default function Join() {
           type="text"
           text="닉네임 입"
           label="닉네임"
-          errorMsg="중복된 닉네임 입니다!"
+          errorMessage="중복된 닉네임 입니다!"
           className="h-[115px]"
         />
-        <Btn
-          text="가입하기"
-          className="bg-primary text-[#ffffff] absolute bottom-[5%] left-0"
-        />
+        <Btn className="bg-primary text-[#ffffff] absolute bottom-[5%] left-0">
+          가입하기
+        </Btn>
       </div>
     </div>
   );
