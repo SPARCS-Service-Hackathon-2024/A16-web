@@ -1,6 +1,7 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
-import api from '.';
 import { createContext, useContext, useEffect } from 'react';
+import api from '.';
+import { saveToken } from '../utils/tokens';
 
 const loginByEmail = ({
   email,
@@ -33,7 +34,7 @@ export const useAuthProvider = () => {
 
   useEffect(() => {
     if (loginResponse?.accessToken) {
-      localStorage.setItem('accessToken', loginResponse.accessToken);
+      saveToken(loginResponse.accessToken);
     }
     refetch();
   }, [loginResponse, refetch]);
