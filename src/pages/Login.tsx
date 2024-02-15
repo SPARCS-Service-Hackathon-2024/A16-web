@@ -68,7 +68,7 @@ export default function Login() {
         className="leading-[80px] mb-[40px] justify-center"
         text="아직계정이 없으신가요?"
         LinkMsg="회원가입"
-        to="/JoinWay"
+        to="/join-way"
       />
     </form>
   );

@@ -16,8 +16,8 @@ const Router = () => {
       <Routes>
         <Route path="/" element={<Splash />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/JoinWay" element={<JoinWay />} />
-        <Route path="/Join" element={<Join />} />
+        <Route path="/join-way" element={<JoinWay />} />
+        <Route path="/join" element={<Join />} />
         <Route path="/Home" element={<Home />} />
         <Route path="/Alarm" element={<Alarm />} />
         <Route path="/SearchPerson" element={<SearchPerson />} />
