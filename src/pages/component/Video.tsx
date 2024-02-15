@@ -26,6 +26,7 @@ const Video: React.FC<VideoProps> = ({ src, grade, name }) => {
       <video
         className="w-auto h-full object-contain m-auto"
         autoPlay={isPlaying}
+        playsInline
         src="/no.mp4"
         muted
       ></video>

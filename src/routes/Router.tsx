@@ -13,6 +13,7 @@ import { useAuth } from '../api/auth';
 
 const Router = () => {
   const { user } = useAuth();
+  if (user === undefined) return null;
   return (
     <BrowserRouter>
       <Routes>

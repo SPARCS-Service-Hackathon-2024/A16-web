@@ -1,6 +1,4 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import Category from './Category';
+import React, { useEffect, useState } from 'react';
 
 type CategoryChoice = {
   title: string;
@@ -8,15 +6,17 @@ type CategoryChoice = {
   icon?: React.ReactNode;
   className?: string;
   not?: boolean;
+  onChange?: (category: string[]) => void;
 };
 
-const CategoryChoice: React.FC<CategoryChoice> = ({
+const CategoryChoice = ({
   className,
   title,
   icon,
   category,
   not,
-}) => {
+  onChange,
+}: CategoryChoice) => {
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
 
   const handleCategoryClick = (category: string) => {
@@ -38,11 +38,13 @@ const CategoryChoice: React.FC<CategoryChoice> = ({
     setSelectedNot(true);
   };
 
+  useEffect(() => {
+    onChange && onChange(selectedCategories);
+  }, [onChange, selectedCategories]);
+
   return (
-    <div
-      className={`w-[80%] min-h-[150px] pb-[10px] bg-white rounded-2xl mx-auto mt-[20px] mb-[50px]`}
-    >
-      <div className="flex items-center justify-center h-[50px] text-xl font-bold">
+    <div className={`min-h-[150px] pb-[10px] bg-white rounded-2xl mx-auto`}>
+      <div className="flex items-center justify-center h-[50px] text-xl font-bold gap-2">
         {icon}
         <h3>{title}</h3>
       </div>
@@ -51,6 +53,7 @@ const CategoryChoice: React.FC<CategoryChoice> = ({
       >
         {not && (
           <button
+            type="button"
             className={`py-2 px-3 m-2 rounded-xl ${
               selectedNot ? 'bg-primary text-white' : 'bg-[#D9D9D9]'
             }`}
@@ -61,6 +64,7 @@ const CategoryChoice: React.FC<CategoryChoice> = ({
         )}
         {category.map((e, index) => (
           <button
+            type="button"
             key={index}
             className={`py-2 px-3 m-2 rounded-xl ${
               selectedCategories.includes(e)
