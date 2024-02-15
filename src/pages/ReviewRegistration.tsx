@@ -28,10 +28,7 @@ const tags = [
 export default function ReviewRegistration() {
   const navigate = useNavigate();
   const [star, setStar] = useState<number>(1);
-  const [selectedCategories, setSelectedCategories] = useState<string[]>([
-    '맛집',
-    '혼자',
-  ]);
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
 
   const handleCategoryClick = (category: string) => {
     if (selectedCategories.includes(category)) {
@@ -183,7 +180,7 @@ export default function ReviewRegistration() {
         </div>
         <div className="w-full bg-white px-2 py-5 flex flex-col justify-center items-center rounded-xl">
           <h3 className="text-base font-bold">
-            방문한 장소와 어울리는
+            방문한 장소와 어울리는{' '}
             <span className="text-[#2E83F2]">키워드</span>를 골라주세요!
           </h3>
           <p className="leading-10">누구와 방문하면 좋을 것 같나요?</p>
