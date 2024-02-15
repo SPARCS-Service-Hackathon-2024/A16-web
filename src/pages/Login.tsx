@@ -58,7 +58,7 @@ export default function Login() {
       <LinkText
         className="leading-[30px] mb-[40px] justify-end"
         LinkMsg="비밀번호 재설정"
-        to="/Login"
+        to="/login"
       />
       <Btn className="bg-primary text-white">로그인</Btn>
       <Btn className="bg-[#F2DA00] text-[#282732] border border-[#E8E9EA]">

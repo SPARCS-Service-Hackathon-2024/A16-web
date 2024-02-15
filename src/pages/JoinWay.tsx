@@ -15,7 +15,7 @@ export default function JoinWay() {
         className="leading-10 mb-10 justify-center"
         text="이미 회원이신가요?"
         LinkMsg="로그인"
-        to="/Login"
+        to="/login"
       />
     </div>
   );
