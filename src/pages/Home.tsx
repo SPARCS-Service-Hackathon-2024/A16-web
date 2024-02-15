@@ -7,7 +7,7 @@ import SearchMenu from './component/SearchMenu';
 
 export default function Home() {
   return (
-    <div className="h-screen">
+    <div className="pb-[70px]">
       <Header alarm={true} review={true} />
       <SearchMenu />
       <div className="mx-[10%]">

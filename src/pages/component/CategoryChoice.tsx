@@ -43,7 +43,7 @@ const CategoryChoice = ({
   }, [onChange, selectedCategories]);
 
   return (
-    <div className={`min-h-[150px] pb-[10px] bg-white rounded-2xl mx-auto`}>
+    <div className={`min-h-[150px] pb-[10px] bg-white rounded-2xl`}>
       <div className="flex items-center justify-center h-[50px] text-xl font-bold gap-2">
         {icon}
         <h3>{title}</h3>
