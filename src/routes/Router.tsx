@@ -10,6 +10,7 @@ import Store from '../pages/Store';
 import Videos from '../pages/Videos';
 import Setting from '../pages/Setting';
 import { useAuth } from '../api/auth';
+import ReviewRegistration from '../pages/ReviewRegistration';
 
 const Router = () => {
   const { user } = useAuth();
@@ -26,6 +27,10 @@ const Router = () => {
             <Route path="/Store" element={<Store />} />
             <Route path="/Videos" element={<Videos />} />
             <Route path="/setting" element={<Setting />} />
+            <Route
+              path="/reviewRegistration"
+              element={<ReviewRegistration />}
+            />
             <Route path="*" element={<Navigate to="/home" />} />
           </>
         ) : (

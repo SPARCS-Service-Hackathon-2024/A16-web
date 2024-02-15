@@ -21,9 +21,9 @@ import Menu from './component/Menu';
 
 export default function Store() {
   return (
-    <div className="h-[100vh]">
+    <div className="h-min-full pb-[60px]">
       <Header back={true} alarm={true} />
-      <div className="py-[56px] bg-white ">
+      <div className="bg-white ">
         <div className="w-full h-[240px]">
           <img
             className="w-full h-full object-cover"
