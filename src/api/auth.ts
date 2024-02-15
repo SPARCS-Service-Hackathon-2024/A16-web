@@ -13,23 +13,17 @@ const loginByEmail = ({
     accessToken: data.accessToken as string,
   }));
 
-const useAuthProvider = () => {
+export const useAuthProvider = () => {
   const { mutate: mutateByEmail, error: emailLoginError } = useMutation({
     mutationFn: loginByEmail,
   });
   return { loginByEmail: mutateByEmail, error: emailLoginError };
 };
 
-const authContext = createContext<
+export const authContext = createContext<
   ReturnType<typeof useAuthProvider> | undefined
 >(undefined);
 
-export const AuthProvider = ({ children }: React.PropsWithChildren) => {
-  const value = useAuthProvider();
-  return <authContext.Provider value={value}>{children}</authContext.Provider>;
-};
-
-// eslint-disable-next-line react-refresh/only-export-components
 export const useAuth = () => {
   const value = useContext(authContext);
   if (!value)

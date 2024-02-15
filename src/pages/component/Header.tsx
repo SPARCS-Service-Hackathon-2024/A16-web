@@ -42,6 +42,7 @@ const Header: React.FC<HeaderProps> = ({
         <div className="w-[100px]">
           {back && (
             <button
+              type="button"
               onClick={toBackClick}
               className="bg-transparent outline-none h-[24px] w-[24px] flex items-center"
             >

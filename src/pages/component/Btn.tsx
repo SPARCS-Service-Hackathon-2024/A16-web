@@ -13,7 +13,7 @@ const Btn = ({
   return (
     <button
       {...props}
-      className={`h-[48px]  ${className} text-lg text-center rounded-lg`}
+      className={`h-[48px] px-2 ${className} text-lg text-center rounded-lg`}
     >
       {children}
     </button>
