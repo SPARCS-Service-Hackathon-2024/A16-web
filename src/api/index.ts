@@ -3,6 +3,7 @@ import axios from 'axios';
 const api = axios.create({
   // baseURL: 'https://wayu.hackathon.sparcs.net/'
   baseURL: 'https://fc5c-49-165-90-85.ngrok-free.app',
+  headers: { 'ngrok-skip-browser-warning': '1' },
 });
 
 api.interceptors.request.use((config) => {
