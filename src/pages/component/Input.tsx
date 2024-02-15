@@ -6,6 +6,7 @@ type InputProps = {
   label?: string;
   className?: string;
   errorMessage?: string;
+  trailing?: React.ReactNode;
 };
 
 const Input = ({
@@ -14,6 +15,7 @@ const Input = ({
   label,
   className,
   errorMessage,
+  trailing,
   ...inputProps
 }: InputProps & React.InputHTMLAttributes<HTMLInputElement>) => {
   const [value, setValue] = useState<string>('');
@@ -29,36 +31,39 @@ const Input = ({
   };
 
   return (
-    <div className={`${className} mb-[8px]`}>
+    <div className={`${className}`}>
       {label && <h3 className="leading-[30px]">{label}</h3>}
       <div
-        className={`w-[100%] h-[48px] flex justify-between pl-3 leading-[48px] rounded-lg border border-[#E5E5E5] bg-[#F7F8F9]`}
+        className={`h-[48px] flex justify-between leading-[48px] rounded-lg items-end gap-4`}
       >
-        <input
-          {...inputProps}
-          type={typeInput}
-          value={value}
-          onChange={handleChange}
-          className={`${
-            type == 'text' ? 'w-[98%]' : 'w-[85%]'
-          } h-[48px] text-base mb-[4px] outline-none placeholder-[#CECED1] bg-[#F7F8F9]`}
-          placeholder={text}
-        />
-        {type == 'password' && (
-          <button
-            type="button"
-            onClick={togglePasswordVisibility}
-            className="bg-transparent outline-none h-[24px] w-[24px] m-auto"
-          >
-            <img
-              src={
-                typeInput == 'text' ? '/assets/show.png' : '/assets/hide.png'
-              }
-              alt="eye"
-              className="object-cover w-full h-full"
-            />
-          </button>
-        )}
+        <div className="relative flex-1">
+          <input
+            {...inputProps}
+            type={typeInput}
+            value={value}
+            onChange={handleChange}
+            className={`h-[48px] w-full text-base px-2 outline-none border border-[#E5E5E5] placeholder-[#CECED1] bg-[#F7F8F9] ${
+              type === 'password' ? 'pr-10' : ''
+            }`}
+            placeholder={text}
+          />
+          {type === 'password' && (
+            <button
+              type="button"
+              onClick={togglePasswordVisibility}
+              className="bg-transparent outline-none h-[24px] w-[24px] m-auto absolute right-2 top-1/2 -translate-y-1/2"
+            >
+              <img
+                src={
+                  typeInput == 'text' ? '/assets/show.png' : '/assets/hide.png'
+                }
+                alt="eye"
+                className="object-cover w-full h-full"
+              />
+            </button>
+          )}
+        </div>
+        {trailing}
       </div>
       {errorMessage && (
         <p className="text-[#FF0000] text-sm leading-[24px]">{errorMessage}</p>
