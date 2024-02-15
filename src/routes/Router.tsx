@@ -12,6 +12,7 @@ import Setting from '../pages/Setting';
 import { useAuth } from '../api/auth';
 import ReviewRegistration from '../pages/ReviewRegistration';
 import MapPage from '../pages/Map';
+import MyPage from '../pages/MyPage';
 
 const Router = () => {
   const { user } = useAuth();
@@ -27,6 +28,7 @@ const Router = () => {
             <Route path="/SearchPlace" element={<SearchPlace />} />
             <Route path="/Store" element={<Store />} />
             <Route path="/Videos" element={<Videos />} />
+            <Route path="/mypage" element={<MyPage />} />
             <Route path="/setting" element={<Setting />} />
             <Route
               path="/reviewRegistration"
