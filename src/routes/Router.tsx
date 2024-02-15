@@ -17,13 +17,13 @@ const Router = () => {
       <Routes>
         {user ? (
           <>
-            <Route path="/Home" element={<Home />} />
+            <Route path="/home" element={<Home />} />
             <Route path="/Alarm" element={<Alarm />} />
             <Route path="/SearchPerson" element={<SearchPerson />} />
             <Route path="/SearchPlace" element={<SearchPlace />} />
             <Route path="/Store" element={<Store />} />
             <Route path="/Videos" element={<Videos />} />
-            <Route path="*" element={<Navigate to="/Home" />} />
+            <Route path="*" element={<Navigate to="/home" />} />
           </>
         ) : (
           <>
