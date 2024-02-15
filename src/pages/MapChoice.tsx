@@ -1,22 +1,15 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import map from "../../assets/map.svg"
+import React from "react";
+import Header from "./component/Header";
+import { Link } from "react-router-dom";
+import Menu from "./component/Menu";
+import Map from "./component/Map";
 
-// type CommentProps = {
-//     home?: boolean;
-//     map?: boolean;
-//     video?: boolean;
-//     mypage?: boolean;
-// }
+export default function MapChoice() {
+  return (
+    <div className="h-[100vh] mb-[60px]">
+      <Header back={true} review={true} white={true} text=" " />
 
-const Comment: React.FC = () => {
-
-
-    return (
-        <div className='w-full h-full'>
-
-        </div>
-    );
+      <Menu video={true} />
+    </div>
+  );
 }
-
-export default Comment;
