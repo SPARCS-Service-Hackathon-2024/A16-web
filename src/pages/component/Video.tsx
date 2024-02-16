@@ -10,7 +10,15 @@ type VideoProps = {
   grade?: string;
 };
 
-const Video = ({ user, place, tags, stars, likes, active }: VideoProps) => {
+const Video = ({
+  user,
+  place,
+  tags,
+  stars,
+  likes,
+  active,
+  files,
+}: VideoProps) => {
   const videoEl = React.useRef<HTMLVideoElement>(null);
 
   const handleVideoClick = () => {
@@ -42,7 +50,7 @@ const Video = ({ user, place, tags, stars, likes, active }: VideoProps) => {
         className="w-auto h-full object-contain m-auto"
         ref={videoEl}
         playsInline
-        src="/no.mp4"
+        src={files[0].url}
         muted
       ></video>
       <div className="bg-gradient-video w-full h-full absolute top-0 left-0"></div>
