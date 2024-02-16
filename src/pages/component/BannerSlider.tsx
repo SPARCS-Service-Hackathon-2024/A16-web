@@ -14,27 +14,45 @@ const BannerSlider: React.FC = () => {
   return (
     <div>
       <Swiper
-        className='w-full rounded-3xl max-w-[480px] mb-[20px]'
+        className="w-full rounded-3xl max-w-[480px] mb-[20px]"
         spaceBetween={30}
         slidesPerView={1}
         loop={true}
         pagination={{ clickable: true }}
-        autoplay= {{delay:2000 , disableOnInteraction: false}}
+        autoplay={{ delay: 2000, disableOnInteraction: false }}
         onSlideChange={handleSlideChange}
       >
         <SwiperSlide>
-          <img className='w-full object-cover' src="/assets/banner/banner1.png" alt="banner" />
+          <img
+            className="w-full object-cover"
+            src="/assets/banner/banner1.png"
+            alt="banner"
+          />
         </SwiperSlide>
         <SwiperSlide>
-          <img className='w-full object-cover' src="/assets/banner/banner1.png" alt="banner" />
+          <img
+            className="w-full object-cover"
+            src="/assets/banner/banner2.png"
+            alt="banner"
+          />
         </SwiperSlide>
         <SwiperSlide>
-          <img className='w-full object-cover' src="/assets/banner/banner1.png" alt="banner" />
+          <img
+            className="w-full object-cover"
+            src="/assets/banner/banner3.png"
+            alt="banner"
+          />
         </SwiperSlide>
         <SwiperSlide>
-          <img className='w-full object-cover' src="/assets/banner/banner1.png" alt="banner" />
+          <img
+            className="w-full object-cover"
+            src="/assets/banner/banner4.png"
+            alt="banner"
+          />
         </SwiperSlide>
-        <div className="absolute px-2 py-1 re text-xs bottom-3 right-5 text-[#ffffff] rounded-lg bg-black bg-opacity-50 z-40">{currentIndex+1} / {totalSlides}</div>
+        <div className="absolute px-2 py-1 re text-xs bottom-3 right-5 text-[#ffffff] rounded-lg bg-black bg-opacity-50 z-40">
+          {currentIndex + 1} / {totalSlides}
+        </div>
       </Swiper>
     </div>
   );
