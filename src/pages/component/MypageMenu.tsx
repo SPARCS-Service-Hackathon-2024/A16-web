@@ -1,7 +1,4 @@
 import React, { useState } from 'react';
-import GStar from '../../assets/GStar.png';
-import YStar from '../../assets/YStar.png';
-import HalfStar from '../../assets/HalfStar.png';
 import Reviews from './Reviews';
 
 const MypageMenu: React.FC = () => {

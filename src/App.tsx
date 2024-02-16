@@ -9,9 +9,11 @@ const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       queryFn: async ({ queryKey }) =>
-        api.get(queryKey[0] as string, {
-          params: queryKey[1],
-        }),
+        api
+          .get(queryKey[0] as string, {
+            params: queryKey[1],
+          })
+          .then(({ data }) => data),
     },
   },
 });

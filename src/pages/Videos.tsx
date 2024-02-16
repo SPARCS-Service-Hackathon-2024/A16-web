@@ -32,7 +32,7 @@ export default function Videos() {
   useEffect(() => {
     if (id) return;
     if (!data) return;
-    navigate(`/review/${data.data.list[0].id}`);
+    navigate(`/review/${data.list[0].id}`);
   }, [data, id, navigate]);
 
   const [activeIndex, setActiveIndex] = useState(0);
@@ -46,7 +46,7 @@ export default function Videos() {
         slidesPerView={1}
         onSlideChange={(swiper) => setActiveIndex(swiper.activeIndex)}
       >
-        {data?.data.list.map((review, index) => (
+        {data?.list.map((review, index) => (
           <SwiperSlide key={review.id}>
             <div className="h-full w-full">
               <Video {...review} active={activeIndex === index} />
