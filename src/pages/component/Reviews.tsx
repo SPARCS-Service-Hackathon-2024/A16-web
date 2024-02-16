@@ -12,14 +12,14 @@ const Reviews = () => {
   const { user } = useAuth();
   const { data } = useQuery({ queryKey: [`/user/${user?.id}/reviews`] });
   return (
-    <div>
+    <div className="grid grid-cols-3">
       {data?.list.map((review: any) => (
         <div key={review.id}>
           <Link to={`/review/${review.id}`}>
-            <div className="relative shadow-custom2 w-1/3 h-[200px] p-[0.5px] block">
+            <div className="relative shadow-custom2 h-[200px] p-[0.5px] block">
               <img
                 className="w-full h-full object-cover"
-                src={review.thumbnail}
+                src={review.files[0].thumbnail}
                 alt=""
               />
               <p className="absolute left-2 bottom-2 text-white text-sm">
