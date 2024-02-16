@@ -15,6 +15,7 @@ import MapPage from '../pages/Map';
 import ProfileChange from '../pages/ProfileChange';
 import MyPage from '../pages/MyPage';
 import Point from '../pages/Point';
+import YouPage from '../pages/YouPage';
 
 const Router = () => {
   const { user } = useAuth();
@@ -35,6 +36,7 @@ const Router = () => {
             <Route path="/setting" element={<Setting />} />
             <Route path="/profileChange" element={<ProfileChange />} />
             <Route path="/Point" element={<Point />} />
+            <Route path="/youPage" element={<YouPage />} />
             <Route
               path="/review-registration"
               element={<ReviewRegistration />}
