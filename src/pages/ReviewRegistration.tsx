@@ -98,7 +98,7 @@ export default function ReviewRegistration() {
                     <Btn className="bg-primary text-white">검색하기</Btn>
                   </form>
                   <ul className="flex flex-col gap-1 py-2">
-                    {searchData?.data.documents.map((place: any) => (
+                    {searchData?.documents.map((place: any) => (
                       <li key={place.id}>
                         <button
                           type="button"

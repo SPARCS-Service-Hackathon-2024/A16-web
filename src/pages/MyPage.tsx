@@ -1,7 +1,7 @@
-import Header from './component/Header';
 import { Link } from 'react-router-dom';
-import MypageMenu from './component/MypageMenu';
+import Header from './component/Header';
 import Menu from './component/Menu';
+import MypageMenu from './component/MypageMenu';
 
 export default function MyPage() {
   return (

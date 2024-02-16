@@ -17,6 +17,7 @@ import CircleStyle from 'ol/style/Circle';
 import Fill from 'ol/style/Fill';
 import Stroke from 'ol/style/Stroke';
 import Text from 'ol/style/Text';
+import Menu from './component/Menu';
 
 const MapPage = () => {
   const wrapperEl = useRef<HTMLDivElement>(null);
@@ -117,6 +118,7 @@ const MapPage = () => {
           </div>
         )}
       </div>
+      <Menu map />
     </div>
   );
 };
